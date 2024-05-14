@@ -4,17 +4,17 @@
 1. 单击[部署链接](https://computenest.console.aliyun.com/service/instance/create/cn-hangzhou?spm=5176.24779694.0.0.36be4d22zpKKq3&type=user&ServiceId=service-ae7e12bcabc840f1bf14&isTrial=true)
 2. 进入开通配置界面按照我们推荐的[机器规格]() 依次填写完服务实例名称，选择地域，付费类型，数据库的账号密码，集群的配置以及网络的配置并点击**确认订单**
 
-![image.png](../images/create.png)
-![image.png](../images/dbAndK8s.png) ![image.png](../images/net.png)
+![image.png](images/create.png)
+![image.png](images/dbAndK8s.png) ![image.png](images/net.png)
 
 3. 确认订单页会显示缺少的权限、基础配置和账单，建议申请完缺失的权限后再点击立即创建则进入创建环节
 
-![image.png](../images/permissions.png)
-![image.png](../images/billing.png)
+![image.png](images/permissions.png)
+![image.png](images/billing.png)
 
 4. 点击查看已创建的实例
 
-![image.png](../images/show_instance.png)
+![image.png](images/show_instance.png)
 ### 机器规格（TB级数据规模推荐）
 **ACK集群**
 规格：
@@ -42,18 +42,18 @@
 ### 管理资源
 
 1. 点击服务实例，进入后可以看到服务详情，等待创建完成，整个流程约20分钟
-![image.png](../images/watch_instance.png)
-![image.png](../images/service_detail.png)
+![image.png](images/watch_instance.png)
+![image.png](images/service_detail.png)
 
 2. 点击查看资源mysql、redis和ecs等实例，并进行维护
-![image.png](../images/resourceList.png)
+![image.png](images/resourceList.png)
 
 ## 快速体验
 ### 确认服务部署成功
 进入计算巢服务后，选择【我的服务】-> 【服务实例】查看所有目前保有的实例
-![image.png](../images/watch_instance.png)
+![image.png](images/watch_instance.png)
 ### 查看对外服务ip
-![image.png](../images/service_ip.png)
+![image.png](images/service_ip.png)
 ### 配置用户oss地址（必须）
 默认租户名称为 idatahub_KR_PROD_AMKTW3SG
 
@@ -209,17 +209,17 @@ LIMIT 200;
 ```
 step2：查看ack集群->点击工作负载->容器组->切换命名空间为default->按标签查询
 查询：**mss_job_id= 查出来的job_id（去除最后一个字符）**
-![image.png](../images/watch_job_id.png)
+![image.png](images/watch_job_id.png)
 ### 网页体验(仅用于体验非商业化版本)
 登录页面
-![image.png](../images/login.png)
+![image.png](images/login.png)
 登录主页
-![image.png](../images/home.png)
+![image.png](images/home.png)
 密态数据分析场景(数据提供方)
-![image.png](../images/sale.png)
+![image.png](images/sale.png)
 密态数据分析场景（数据使用方)
-![image.png](../images/buyer.png)
-![image.png](../images/submit_task.png)
+![image.png](images/buyer.png)
+![image.png](images/submit_task.png)
 #### 更多平台体验链接
 进群联系管理员 @霖珂和@冬雪
 # 联系我们
@@ -229,8 +229,8 @@ step2：查看ack集群->点击工作负载->容器组->切换命名空间为def
 
 MAPPIC钉钉交流群：
 
-![image.png](../images/dingding.png)
+![image.png](images/dingding.png)
 
 MAPPIC微信交流群：
 
-![image.png](../images/wx.png)
+![image.png](images/wx.png)
