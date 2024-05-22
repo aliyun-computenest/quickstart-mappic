@@ -92,7 +92,7 @@ MAPPIC是蚂蚁数科面向海量数据和模型隐私保护的密态计算平�
 
 | 定义 | 描述 |
 | -- | ------- |
-| tenantId | 租户名称: **idatahub_KR_PROD_AMKTW3SG** |
+| tenantId | 租户名称: **mappic_confidential_cloud_computing** |
 
 **4.配置用户oss地址（必须)**
 
@@ -123,7 +123,7 @@ MAPPIC是蚂蚁数科面向海量数据和模型隐私保护的密态计算平�
 &nbsp;&nbsp;&nbsp;&nbsp;通过如下接口更新租户oss配置
 
 ```java
-curl -X POST -d  '{"tenantId": "idatahub_KR_PROD_AMKTW3SG","ossEndpoint": "xxxxxxxx","ossAccessKeyId": "xxxxxxx","ossAccessKeySecret": "xxxxxxx","mainDevOssEp": "xxxxxxx","mainDevOssBucketName": "xxxxxxx","mainDevOssFilePath": "xxxxxxx","mainDevOssAccessKeyId": "xxxxxxx","mainDevOssAccessKeySecret": "xxxxxxx","mappicOssBucketName": "xxxxxxx","mainDevOssLogFilePath": "xxxxxxx","mappicOssAccessKeyId": "xxxxxxx","mappicOssAccessKeySecret": "xxxxxxx"}' \
+curl -X POST -d  '{"tenantId": "mappic_confidential_cloud_computing","ossEndpoint": "xxxxxxxx","ossAccessKeyId": "xxxxxxx","ossAccessKeySecret": "xxxxxxx","mainDevOssEp": "xxxxxxx","mainDevOssBucketName": "xxxxxxx","mainDevOssFilePath": "xxxxxxx","mainDevOssAccessKeyId": "xxxxxxx","mainDevOssAccessKeySecret": "xxxxxxx","mappicOssBucketName": "xxxxxxx","mainDevOssLogFilePath": "xxxxxxx","mappicOssAccessKeyId": "xxxxxxx","mappicOssAccessKeySecret": "xxxxxxx"}' \
         --header 'Content-Type: application/json' \
         --header 'Accept: */*' \
         --header 'Connection: keep-alive' \
@@ -132,7 +132,7 @@ curl -X POST -d  '{"tenantId": "idatahub_KR_PROD_AMKTW3SG","ossEndpoint": "xxxxx
 
 **5.接口接入**
 
-如下的**tenantId**入参皆为上述中的**租户名称：idatahub_KR_PROD_AMKTW3SG**
+如下的**tenantId**入参皆为上述中的**租户名称：mappic_confidential_cloud_computing**
 
 **step1: 可信应用初始化(必须执行)**
 
@@ -158,7 +158,7 @@ curl --location --request POST '对外服务ip:8889/mappic/datameta' \
 --header 'Accept: */*' \
 --header 'Connection: keep-alive' \
 --data '{
-    "tenantId": "idatahub_KR_PROD_AMKTW3SG",
+    "tenantId": "mappic_confidential_cloud_computing",
     "tableMetas": [
         {
             "tableName": "fred_test_table22",
@@ -182,7 +182,7 @@ curl --location --request POST 'http://对外服务ip:8889/mappic/datameta' \
 --header 'Accept: */*' \
 --header 'Connection: keep-alive' \
 --data-raw '{
-    "tenantId": "idatahub_KR_PROD_AMKTW3SG",
+    "tenantId": "mappic_confidential_cloud_computing",
     "tableMetas": [
         {
             "tableName": "adm_ctu_app_gn_multi_data_collect_di", // 表名
@@ -210,7 +210,7 @@ curl --location 'http://对外服务ip:8889/mappic/task/template' \
 --header 'Accept: */*' \
 --header 'Connection: keep-alive' \
 --data '{
-    "tenantId":"idatahub_KR_PROD_AMKTW3SG",
+    "tenantId":"mappic_confidential_cloud_computing",
     "sql":"select * from adm_ctu_app_gn_multi_data_collect_di limit 1000",
     "config":{},
     "inputTables":["bfaa0186c7914119bf23ed0f30b4d4b6.adm_ctu_app_gn_multi_data_collect_di"],// 机构id·表名的结构
@@ -232,7 +232,7 @@ curl --location 'http://对外服务ip:8889/mappic/task/template' \
 
 任务日志的**taskInstanceId**需要输入的是创建任务时返回的
 ```json
-curl --location 'localhost:8889/mappic/task/log?taskInstanceId=任务实例&tenantId=idatahub_KR_PROD_AMKTW3SG&logWindowSecs=1'
+curl --location 'localhost:8889/mappic/task/log?taskInstanceId=任务实例&tenantId=mappic_confidential_cloud_computing&logWindowSecs=1'
 
 // 查询日志返回结果
 { 
@@ -246,7 +246,7 @@ curl --location 'localhost:8889/mappic/task/log?taskInstanceId=任务实例&tena
 }
 ```
 ```json
-curl --location 'localhost:8889/mappic/task/detail?taskInstanceId=任务实例id&tenantId=idatahub_KR_PROD_AMKTW3SG&env=DEV'
+curl --location 'localhost:8889/mappic/task/detail?taskInstanceId=任务实例id&tenantId=mappic_confidential_cloud_computing&env=DEV'
 
 // 查询任务详情返回结果
 {
@@ -264,7 +264,7 @@ curl --location 'localhost:8889/mappic/task/detail?taskInstanceId=任务实例id
 curl --location 'localhost:8889/mappic/task/status/list' \
 --header 'Content-Type: application/json' \
 --data '{
-    "tenantId": "idatahub_KR_PROD_AMKTW3SG",
+    "tenantId": "mappic_confidential_cloud_computing",
     "taskInstanceIds": ["任务的实例"]
 }'
 
