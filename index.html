@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="计算巢是阿里云开放给企业应用服务商的服务管理平台。服务商能够在计算巢上发布私有化部署服务，为其客户提供云上软件一键部署的能力；同时也支持全托管模式的服务，赋能服务商托管其客户资源。">
+  <title>部署密态计算云平台（MAPPIC） - Aliyun 计算巢 x Demo</title>
+
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+  <link rel="stylesheet" href="css/theme.css">
+  
+
+  
+
+  
+  
+
+  
+    <script src="search/main.js"></script>
+  
+
+  
+
+  <script src="js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="nav-inner">
+        <div class="logo">
+          <img src="./img/logo-2x.png">
+        </div>
+        <div class="nav-list">
+          <ul>
+          
+              <li><a href="#mappic">部署密态计算云平台（MAPPIC）</a></li>
+              
+                  <li><a href="#_1">概述</a></li>
+                  
+              
+                  <li><a href="#tb">实例规格（TB级数据规模推荐）</a></li>
+                  
+              
+                  <li><a href="#_2">部署流程</a></li>
+                  
+                      <li class="li-h3"><a href="#0">0.准备工作</a></li>
+                  
+                      <li class="li-h3"><a href="#1">1.部署入口</a></li>
+                  
+                      <li class="li-h3"><a href="#2">2.申请试用</a></li>
+                  
+                      <li class="li-h3"><a href="#3">3.创建服务</a></li>
+                  
+              
+                  <li><a href="#_3">管理资源</a></li>
+                  
+              
+                  <li><a href="#_4">快速体验</a></li>
+                  
+                      <li class="li-h3"><a href="#_5">网页体验(仅用于体验非商业化版本)</a></li>
+                  
+              
+          
+              <li><a href="#_7">联系我们</a></li>
+              
+          
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="content theme-github">
+      
+      <div class="content-inner">        
+        
+        <h1 id="mappic">部署密态计算云平台（MAPPIC）</h1>
+<h2 id="_1">概述</h2>
+<ul>
+<li>
+<p>MAPPIC是蚂蚁数科面向海量数据和模型隐私保护的密态计算平台，MAPPIC在计算巢上提供了体验版本，您无需自行购置云主机，即可在计算巢上快速部署并体验MAPPIC服务、实现运维监控，从而搭建您自己的隐私保护应用。</p>
+</li>
+<li>
+<p>基础能力包括：隐私保护AI/BI、TEE模式的大模型隐私保护推理、微调；同时我们兼容了多种数据和AI开源框架，如Spark、ipex-llm、PyTorch、DeepSpeed等。当然您也可以基于MAPPIC快速构建数据沙箱、可信数据空间等密态场景计算模式。</p>
+</li>
+<li>
+<p>目前MAPPIC提供免费试用版本，欢迎大家申请试用，有任何问题欢迎进群交流。</p>
+</li>
+</ul>
+<h2 id="tb">实例规格（TB级数据规模推荐）</h2>
+<p><strong>ACK集群</strong></p>
+<p>规格：</p>
+<ul>
+<li>4C、32G内存每台</li>
+<li>EPC：48G，明文：48G</li>
+<li>3台ecs</li>
+<li>操作系统 Alibaba Cloud Linux 2.1903 LTS 64位 (Hunting Beagle)</li>
+<li>实例规格 <a href="https://www.alibabacloud.com/help/doc-detail/25378.htm#r7t">ecs.r7t.xlarge</a></li>
+</ul>
+<p>更多商业化规格配置参考欢迎进钉钉群（69285014993）咨询！！！</p>
+<p><strong>mysql</strong></p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>存储容量</th>
+<th>cpu规格</th>
+<th>最大连接数</th>
+<th>时区</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8.0</td>
+<td>100g</td>
+<td>1c 2g</td>
+<td>2000</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>redis</strong></p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>cpu规格</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5.0</td>
+<td>1c 2g</td>
+<td>最低标准，可升级</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">部署流程</h2>
+<h3 id="0">0.准备工作</h3>
+<p>在申请试用之前，您需要准备一个阿里云账号，对ECS、VPC、ROS、ACK、REDIS、RDS等资源进行访问和创建操作。</p>
+<ul>
+<li>若您使用主账号，可以直接创建服务实例</li>
+<li>若您使用RAM用户创建服务实例，且是第一次使用阿里云计算巢，需要在创建服务实例前，对使用的RAM用户的账号添加相应资源的权限。</li>
+</ul>
+<h3 id="1">1.部署入口</h3>
+<p>&nbsp;&nbsp;您可以再阿里云的计算巢中通过 <strong>MAPPIC</strong> 关键字进行搜索，也可以单击下述链接快速体验</p>
+<p>&nbsp;&nbsp;单击<a href="https://computenest.console.aliyun.com/service/instance/create/cn-hangzhou?spm=5176.24779694.0.0.36be4d22zpKKq3&amp;type=user&amp;ServiceId=service-ae7e12bcabc840f1bf14&amp;isTrial=true">部署链接</a></p>
+<h3 id="2">2.申请试用</h3>
+<p>在使用之前，请按照提示信息完成申请，在审核通过之后就可以创建服务</p>
+<p><img src="images/apply.png" width="800" height="200"></p>
+<h3 id="3">3.创建服务</h3>
+<ul>
+<li>进入开通配置界面按照我们推荐的[机器规格] 依次填写完服务实例名称，选择地域，付费类型，数据库的账号密码，集群的配置以及网络的配置并点击<strong>确认订单</strong></li>
+</ul>
+<p><img src="images/create.png" width="800" height="200">
+<img src="images/dbAndK8s.png" width="800" height="200">
+<img src="images/net.png" width="800" height="200"></p>
+<ul>
+<li>确认订单页会显示缺少的权限、基础配置和账单，建议申请完缺失的权限后再点击立即创建则进入创建环节</li>
+</ul>
+<p><img src="images/permissions.png" width="800" height="200"></p>
+<p><img src="images/billing.png" width="800" height="200"></p>
+<ul>
+<li>点击查看已创建的实例</li>
+</ul>
+<p><img src="images/show_instance.png" width="800" height="200"></p>
+<h2 id="_3">管理资源</h2>
+<ul>
+<li>点击服务实例，进入后可以看到服务详情，等待创建完成，整个流程约20分钟</li>
+</ul>
+<p><img src="images/watch_instance.png" width="800" height="200"></p>
+<p><img src="images/service_detail.png" width="800" height="200"></p>
+<ul>
+<li>点击查看资源mysql、redis和ecs等实例，并进行维护</li>
+</ul>
+<p><img src="images/resourceList.png" width="800" height="200"></p>
+<h2 id="_4">快速体验</h2>
+<p><strong>1.确认服务部署结果</strong></p>
+<p>进入计算巢服务后，选择【我的服务】-&gt; 【服务实例】查看所有目前保有的实例
+<img src="images/watch_instance.png" width="800" height="200"></p>
+<p><strong>2.查看对外服务ip</strong></p>
+<p><img src="images/service_ip.png" width="800" height="200"></p>
+<p><strong>3.默认定义(体验版本不支持修改)</strong></p>
+<table>
+<thead>
+<tr>
+<th>定义</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tenantId</td>
+<td>租户名称: <strong>mappic_confidential_cloud_computing</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>4.配置用户oss地址（必须)</strong></p>
+<p>修改oss的地址为用户自己的oss</p>
+<p><strong>修改点一：修改属性spark_config中的 如下属性</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>字段含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ossEndpoint</td>
+<td>用户自己的oss地址</td>
+</tr>
+<tr>
+<td>ossAccessKeyId</td>
+<td>用户自己oss地址AK</td>
+</tr>
+<tr>
+<td>ossAccessKeySecret</td>
+<td>用户自己oss地址SK</td>
+</tr>
+</tbody>
+</table>
+<p><strong>修改点二：修改属性oss_config中的如下字段:</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>字段含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mainDevOssEp</td>
+<td>用户自己的oss地址</td>
+</tr>
+<tr>
+<td>mainDevOssBucketName</td>
+<td>执行计划上传的bucketName</td>
+</tr>
+<tr>
+<td>mainDevOssFilePath</td>
+<td>执行计划上传的路径</td>
+</tr>
+<tr>
+<td>mainDevOssAccessKeyId</td>
+<td>oss的AK</td>
+</tr>
+<tr>
+<td>mainDevOssAccessKeySecret</td>
+<td>oss的SK</td>
+</tr>
+<tr>
+<td>mappicOssBucketName</td>
+<td>日志上传的bucketName</td>
+</tr>
+<tr>
+<td>mainDevOssLogFilePath</td>
+<td>任务执行的日志存储路径</td>
+</tr>
+<tr>
+<td>mappicOssAccessKeyId</td>
+<td>oss的AK</td>
+</tr>
+<tr>
+<td>mappicOssAccessKeySecret</td>
+<td>oss的SK</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;通过如下接口更新租户oss配置</p>
+<pre><code class="language-java">curl -X POST -d  '{&quot;tenantId&quot;: &quot;mappic_confidential_cloud_computing&quot;,&quot;ossEndpoint&quot;: &quot;xxxxxxxx&quot;,&quot;ossAccessKeyId&quot;: &quot;xxxxxxx&quot;,&quot;ossAccessKeySecret&quot;: &quot;xxxxxxx&quot;,&quot;mainDevOssEp&quot;: &quot;xxxxxxx&quot;,&quot;mainDevOssBucketName&quot;: &quot;xxxxxxx&quot;,&quot;mainDevOssFilePath&quot;: &quot;xxxxxxx&quot;,&quot;mainDevOssAccessKeyId&quot;: &quot;xxxxxxx&quot;,&quot;mainDevOssAccessKeySecret&quot;: &quot;xxxxxxx&quot;,&quot;mappicOssBucketName&quot;: &quot;xxxxxxx&quot;,&quot;mainDevOssLogFilePath&quot;: &quot;xxxxxxx&quot;,&quot;mappicOssAccessKeyId&quot;: &quot;xxxxxxx&quot;,&quot;mappicOssAccessKeySecret&quot;: &quot;xxxxxxx&quot;}' \
+        --header 'Content-Type: application/json' \
+        --header 'Accept: */*' \
+        --header 'Connection: keep-alive' \
+        'http://对外服务ip:8889/mappic/tenant/oss/update' 
+</code></pre>
+<p><strong>5.接口接入</strong></p>
+<p>如下的<strong>tenantId</strong>入参皆为上述中的<strong>租户名称：mappic_confidential_cloud_computing</strong></p>
+<p><strong>step1: 可信应用初始化(必须执行)</strong></p>
+<pre><code class="language-java">curl --location '对外服务ip:8889/api/antchain/installApp' \
+--header 'Content-Type: application/json' \
+--data '{
+    &quot;tappId&quot;:&quot;mappic-vic&quot;,
+    &quot;tappVersion&quot;:1
+}'
+
+// 返回结果
+{&quot;filesName&quot;:null,&quot;executeId&quot;:null,&quot;executeMessage&quot;:&quot;执行成功&quot;,&quot;failedReason&quot;:null,&quot;successMessage&quot;:&quot;app安装成功&quot;,&quot;object&quot;:null}
+</code></pre>
+<p><strong>step2: 创建元数据</strong></p>
+<p>创建输出表</p>
+<pre><code class="language-java">curl --location --request POST '对外服务ip:8889/mappic/datameta' \
+--header 'Content-Type: application/json' \
+--header 'Accept: */*' \
+--header 'Connection: keep-alive' \
+--data '{
+    &quot;tenantId&quot;: &quot;mappic_confidential_cloud_computing&quot;,
+    &quot;tableMetas&quot;: [
+        {
+            &quot;tableName&quot;: &quot;fred_test_table22&quot;,
+            &quot;instId&quot;: &quot;bfaa0186c7914119bf23ed0f30b4d4b6&quot;,
+            &quot;encryptKey&quot;: null,
+            &quot;storageInfo&quot;: &quot;oss://mappic-dev/endToEnd/fred_test_table22&quot;,
+            &quot;isEncrypted&quot;: false,
+            &quot;partitionPattern&quot;: null,
+            &quot;isTemp&quot;: false,
+            &quot;columnInfo&quot;: [{&quot;columnName&quot;:&quot;event_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;event_link_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;merchant_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;merchant_name&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;user_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;gmt_occur&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;acq_site_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;acq_site_name&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;acq_site_event_amount&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;acq_site_event_currency&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;pay_site_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;pay_site_name&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;pay_site_user_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;pay_site_event_amount&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;pay_site_event_currency&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;gn_payment_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;gn_event_amount&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;gn_site_user_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;payment_scenario&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;is_in_store_payment&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;campaign_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;campaign_type&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;campaign_name&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;campaign_status&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;begin_time&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;end_time&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;promo_amount&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;promo_currency&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;gn_promo_amount&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;promo_type&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;promo_source&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;promo_result&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;promo_stage&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;coupon_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;order_title&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;result_message&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;error_message&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;event_properties&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;refund_status&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;acq_payment_amt&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;pay_result&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;pay_result_message&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;refund_amt&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;order_succ&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;decision_rule_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;psp_decision&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;psp_riskinfo&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;play_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;apt_gn_site_user_id&quot;,&quot;isEncrypted&quot;:false},{&quot;columnName&quot;:&quot;dt&quot;,&quot;isEncrypted&quot;:false}]
+        }
+    ]
+}'
+</code></pre>
+<p>创建输入表</p>
+<pre><code class="language-java">curl --location --request POST 'http://对外服务ip:8889/mappic/datameta' \
+--header 'Content-Type: application/json' \
+--header 'Accept: */*' \
+--header 'Connection: keep-alive' \
+--data-raw '{
+    &quot;tenantId&quot;: &quot;mappic_confidential_cloud_computing&quot;,
+    &quot;tableMetas&quot;: [
+        {
+            &quot;tableName&quot;: &quot;adm_ctu_app_gn_multi_data_collect_di&quot;, // 表名
+            &quot;instId&quot;: &quot;bfaa0186c7914119bf23ed0f30b4d4b6&quot;, // 机构id
+            &quot;encryptKey&quot;: null, 
+            &quot;storageInfo&quot;: &quot;xxxxx&quot;,
+            &quot;isEncrypted&quot;: false,
+            &quot;partitionPattern&quot;: null,
+            &quot;isTemp&quot;: false,
+            &quot;columnInfo&quot;: [
+                    {
+                        &quot;columnName&quot;:&quot;event_id&quot;,
+                        &quot;isEncrypted&quot;:false
+                    }
+                    ]
+        }
+    ]
+}'
+</code></pre>
+<p><strong>step:3 提交任务，获取任务实例</strong></p>
+<pre><code class="language-java">curl --location 'http://对外服务ip:8889/mappic/task/template' \
+--header 'Content-Type: application/json' \
+--header 'Accept: */*' \
+--header 'Connection: keep-alive' \
+--data '{
+    &quot;tenantId&quot;:&quot;mappic_confidential_cloud_computing&quot;,
+    &quot;sql&quot;:&quot;select * from adm_ctu_app_gn_multi_data_collect_di limit 1000&quot;,
+    &quot;config&quot;:{},
+    &quot;inputTables&quot;:[&quot;bfaa0186c7914119bf23ed0f30b4d4b6.adm_ctu_app_gn_multi_data_collect_di&quot;],// 机构id·表名的结构
+    &quot;outputTable&quot;:&quot;bfaa0186c7914119bf23ed0f30b4d4b6.fred_test_table22&quot;,
+    &quot;priorityLevel&quot;:1,
+    &quot;baseConfig&quot;:{
+        &quot;name&quot;:&quot;xxx&quot;,
+        &quot;instId&quot;:&quot;bfaa0186c7914119bf23ed0f30b4d4b6&quot;,
+        &quot;jobId&quot;:&quot;xxxx&quot;,
+        &quot;timestamp&quot;:&quot;2023-11-14 11:28:30&quot;,
+        &quot;env&quot;:&quot;DEV&quot;
+    }
+}'
+</code></pre>
+<p><strong>step4: 查看执行情况</strong></p>
+<ul>
+<li><strong>方式一: 通过接口查看</strong></li>
+</ul>
+<p>任务日志的<strong>taskInstanceId</strong>需要输入的是创建任务时返回的</p>
+<pre><code class="language-json">curl --location 'localhost:8889/mappic/task/log?taskInstanceId=任务实例&amp;tenantId=mappic_confidential_cloud_computing&amp;logWindowSecs=1'
+
+// 查询日志返回结果
+{ 
+  &quot;errorCode&quot;:null,
+  &quot;errorMessage&quot;:null,
+  &quot;status&quot;:null,
+  &quot;data&quot;:{
+    &quot;logPath&quot;:&quot;xxxxxx&quot;
+  },
+  &quot;success&quot;:true
+}
+</code></pre>
+<pre><code class="language-json">curl --location 'localhost:8889/mappic/task/detail?taskInstanceId=任务实例id&amp;tenantId=mappic_confidential_cloud_computing&amp;env=DEV'
+
+// 查询任务详情返回结果
+{
+  &quot;errorCode&quot;:null,
+  &quot;errorMessage&quot;:null,
+  &quot;status&quot;:null,
+  &quot;data&quot;:{
+    &quot;taskInstanceId&quot;:&quot;你的实例id&quot;,
+    &quot;ossPath&quot;:&quot;xxxx&quot;
+  },
+  &quot;success&quot;:true
+}
+</code></pre>
+<pre><code class="language-json">curl --location 'localhost:8889/mappic/task/status/list' \
+--header 'Content-Type: application/json' \
+--data '{
+    &quot;tenantId&quot;: &quot;mappic_confidential_cloud_computing&quot;,
+    &quot;taskInstanceIds&quot;: [&quot;任务的实例&quot;]
+}'
+
+// 查询任务状态返回结果
+{
+  &quot;errorCode&quot;:null,
+  &quot;errorMessage&quot;:null,
+  &quot;status&quot;:null,
+  &quot;data&quot;:{
+    &quot;statusDetail&quot;:[
+      {
+        &quot;taskInstanceId&quot;:&quot;xxxxxx&quot;,
+        &quot;status&quot;:&quot;RUNNING&quot;,
+        &quot;startTime&quot;:&quot;1715602501000&quot;,
+        &quot;currentTime&quot;:&quot;1715603076530&quot;
+      }
+    ]
+  },
+  &quot;success&quot;:true
+}
+</code></pre>
+<ul>
+<li><strong>方式二：控制台查看 执行状态</strong></li>
+</ul>
+<p>step1: 根据任务实例id查看 任务容器标签id，即：job_id</p>
+<pre><code class="language-sql">SELECT a.id, a.`sql`,a.`status`,a.`request_id`,b.`status`,a.`input_tables`,a.`output_table`,
+       b.`mytf_request_id`,a.`create_time`,b.`gmt_finish`,c.`job_id`,a.`spark_args` 
+FROM `task_table` AS a LEFT JOIN `async_tapp_request` AS b ON a.`request_id`= b.`request_id` 
+LEFT JOIN `request_task_relation_table` AS c
+ON b.`mytf_request_id`= c.`task_id` 
+WHERE a.`sql` NOT LIKE &quot;LOAD%&quot; 
+AND a.`instance_id` = &quot;任务实例id&quot;
+ORDER BY a.`id` DESC 
+LIMIT 200;
+</code></pre>
+<p>step2：查看ack集群-&gt;点击工作负载-&gt;容器组-&gt;切换命名空间为default-&gt;按标签查询</p>
+<p>查询：<strong>mss_job_id= 查出来的job_id（去除最后一个字符）</strong></p>
+<p><img src="images/watch_job_id.png" width="800" height="200"></p>
+<h3 id="_5">网页体验(仅用于体验非商业化版本)</h3>
+<p><strong>登录页面</strong></p>
+<p><img src="images/login.png" width="800" height="200"></p>
+<p><strong>登录主页</strong></p>
+<p><img src="images/home.png" width="800" height="200"></p>
+<p><strong>密态数据分析场景(数据提供方)</strong></p>
+<p><img src="images/sale.png" width="800" height="200"></p>
+<p><strong>密态数据分析场景（数据使用方)</strong></p>
+<p><img src="images/buyer.png" width="800" height="200"></p>
+<p><img src="images/submit_task.png" width="800" height="200"></p>
+<h4 id="_6">更多平台体验链接</h4>
+<p>进群联系管理员 <strong>@霖珂和@冬雪</strong></p>
+<h1 id="_7">联系我们</h1>
+<ul>
+<li>
+<p><strong>联系邮箱</strong>：antchainmappic@service.alipay.com</p>
+</li>
+<li>
+<p><strong>快速问题排查</strong>：可通过技术交流群和我们进行联系，详见下面二维码：</p>
+</li>
+</ul>
+<p><strong>MAPPIC钉钉交流群</strong>：</p>
+<p><img src="images/dingding.png" width="150" height="150"></p>
+<p><strong>MAPPIC微信交流群</strong>：</p>
+<p><img src="images/wx.png" width="150" height="150"></p>
+        
+      </div>
+
+      <div class="copyrights">© 2009-2022 Aliyun.com 版权所有</div>
+    </div>
+  </div>
+  
+  <!--
+  MkDocs version      : 1.6.0
+  Docs Build Date UTC : 2024-06-12 08:33:43.550625+00:00
+  -->
+</body>
+</html>
