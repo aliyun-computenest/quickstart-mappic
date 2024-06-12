@@ -1,10 +1,11 @@
 # 部署密态计算云平台（MAPPIC）
 
 ## 概述
-MAPPIC是蚂蚁数科面向海量数据和模型隐私保护的密态计算平台，MAPPIC在计算巢上提供了体验版本，您无需自行购置云主机，即可在计算巢上快速部署并体验MAPPIC服务、实现运维监控，从而搭建您自己的隐私保护应用，参考的基础能力包括: 隐私保护AI/BI、TEE模式的大模型隐私保护推理、微调；我们兼容了多种数<br/>
-据和AI开源框架，如Spark、ipex-llm、PyTorch、DeepSpeed等。当然您也可以基于MAPPIC快速构建数据沙箱、可信数据空间等密态场景计算模式。
+MAPPIC是蚂蚁数科面向海量数据和模型隐私保护的密态计算平台，MAPPIC在计算巢上提供了体验版本，您无需自行购置云主机，即可在计算巢上快速部署并体验MAPPIC服务、实现运维监控，从而搭建您自己的隐私保护应用。
 
-目前MAPPIC处于免费试用阶段，欢迎大家申请试用，期间发现任何问题也欢迎反馈交流。
+基础能力包括：隐私保护AI/BI、TEE模式的大模型隐私保护推理、微调；同时我们兼容了多种数据和AI开源框架，如Spark、ipex-llm、PyTorch、DeepSpeed等。当然您也可以基于MAPPIC快速构建数据沙箱、可信数据空间等密态场景计算模式。
+
+目前MAPPIC提供免费使用版本，欢迎大家申请试用，有任何问题欢迎反馈交流。
 ## 实例规格（TB级数据规模推荐）
 **ACK集群**
 
@@ -101,7 +102,7 @@ MAPPIC是蚂蚁数科面向海量数据和模型隐私保护的密态计算平�
 **修改点一：修改属性spark_config中的 如下属性**
 
 | 字段名称 | 字段含义 |
-| -- | ------- | 
+| -- | ------- |
 | ossEndpoint | 用户自己的oss地址 |
 | ossAccessKeyId | 用户自己oss地址AK |
 | ossAccessKeySecret | 用户自己oss地址SK |
@@ -124,10 +125,10 @@ MAPPIC是蚂蚁数科面向海量数据和模型隐私保护的密态计算平�
 
 ```java
 curl -X POST -d  '{"tenantId": "mappic_confidential_cloud_computing","ossEndpoint": "xxxxxxxx","ossAccessKeyId": "xxxxxxx","ossAccessKeySecret": "xxxxxxx","mainDevOssEp": "xxxxxxx","mainDevOssBucketName": "xxxxxxx","mainDevOssFilePath": "xxxxxxx","mainDevOssAccessKeyId": "xxxxxxx","mainDevOssAccessKeySecret": "xxxxxxx","mappicOssBucketName": "xxxxxxx","mainDevOssLogFilePath": "xxxxxxx","mappicOssAccessKeyId": "xxxxxxx","mappicOssAccessKeySecret": "xxxxxxx"}' \
-        --header 'Content-Type: application/json' \
-        --header 'Accept: */*' \
-        --header 'Connection: keep-alive' \
-        'http://对外服务ip:8889/mappic/tenant/oss/update' 
+    --header 'Content-Type: application/json' \
+    --header 'Accept: */*' \
+    --header 'Connection: keep-alive' \
+    'http://对外服务ip:8889/mappic/tenant/oss/update' 
 ```
 
 **5.接口接入**
@@ -138,14 +139,14 @@ curl -X POST -d  '{"tenantId": "mappic_confidential_cloud_computing","ossEndpoin
 
 ```java
 curl --location '对外服务ip:8889/api/antchain/installApp' \
---header 'Content-Type: application/json' \
---data '{
+    --header 'Content-Type: application/json' \
+    --data '{
     "tappId":"mappic-vic",
     "tappVersion":1
-}'
-        
-// 返回结果
-{"filesName":null,"executeId":null,"executeMessage":"执行成功","failedReason":null,"successMessage":"app安装成功","object":null}
+    }'
+
+    // 返回结果
+    {"filesName":null,"executeId":null,"executeMessage":"执行成功","failedReason":null,"successMessage":"app安装成功","object":null}
 ```
 
 **step2: 创建元数据**
@@ -154,62 +155,62 @@ curl --location '对外服务ip:8889/api/antchain/installApp' \
 
 ```java
 curl --location --request POST '对外服务ip:8889/mappic/datameta' \
---header 'Content-Type: application/json' \
---header 'Accept: */*' \
---header 'Connection: keep-alive' \
---data '{
+    --header 'Content-Type: application/json' \
+    --header 'Accept: */*' \
+    --header 'Connection: keep-alive' \
+    --data '{
     "tenantId": "mappic_confidential_cloud_computing",
     "tableMetas": [
-        {
-            "tableName": "fred_test_table22",
-            "instId": "bfaa0186c7914119bf23ed0f30b4d4b6",
-            "encryptKey": null,
-            "storageInfo": "oss://mappic-dev/endToEnd/fred_test_table22",
-            "isEncrypted": false,
-            "partitionPattern": null,
-            "isTemp": false,
-            "columnInfo": [{"columnName":"event_id","isEncrypted":false},{"columnName":"event_link_id","isEncrypted":false},{"columnName":"merchant_id","isEncrypted":false},{"columnName":"merchant_name","isEncrypted":false},{"columnName":"user_id","isEncrypted":false},{"columnName":"gmt_occur","isEncrypted":false},{"columnName":"acq_site_id","isEncrypted":false},{"columnName":"acq_site_name","isEncrypted":false},{"columnName":"acq_site_event_amount","isEncrypted":false},{"columnName":"acq_site_event_currency","isEncrypted":false},{"columnName":"pay_site_id","isEncrypted":false},{"columnName":"pay_site_name","isEncrypted":false},{"columnName":"pay_site_user_id","isEncrypted":false},{"columnName":"pay_site_event_amount","isEncrypted":false},{"columnName":"pay_site_event_currency","isEncrypted":false},{"columnName":"gn_payment_id","isEncrypted":false},{"columnName":"gn_event_amount","isEncrypted":false},{"columnName":"gn_site_user_id","isEncrypted":false},{"columnName":"payment_scenario","isEncrypted":false},{"columnName":"is_in_store_payment","isEncrypted":false},{"columnName":"campaign_id","isEncrypted":false},{"columnName":"campaign_type","isEncrypted":false},{"columnName":"campaign_name","isEncrypted":false},{"columnName":"campaign_status","isEncrypted":false},{"columnName":"begin_time","isEncrypted":false},{"columnName":"end_time","isEncrypted":false},{"columnName":"promo_amount","isEncrypted":false},{"columnName":"promo_currency","isEncrypted":false},{"columnName":"gn_promo_amount","isEncrypted":false},{"columnName":"promo_type","isEncrypted":false},{"columnName":"promo_source","isEncrypted":false},{"columnName":"promo_result","isEncrypted":false},{"columnName":"promo_stage","isEncrypted":false},{"columnName":"coupon_id","isEncrypted":false},{"columnName":"order_title","isEncrypted":false},{"columnName":"result_message","isEncrypted":false},{"columnName":"error_message","isEncrypted":false},{"columnName":"event_properties","isEncrypted":false},{"columnName":"refund_status","isEncrypted":false},{"columnName":"acq_payment_amt","isEncrypted":false},{"columnName":"pay_result","isEncrypted":false},{"columnName":"pay_result_message","isEncrypted":false},{"columnName":"refund_amt","isEncrypted":false},{"columnName":"order_succ","isEncrypted":false},{"columnName":"decision_rule_id","isEncrypted":false},{"columnName":"psp_decision","isEncrypted":false},{"columnName":"psp_riskinfo","isEncrypted":false},{"columnName":"play_id","isEncrypted":false},{"columnName":"apt_gn_site_user_id","isEncrypted":false},{"columnName":"dt","isEncrypted":false}]
-        }
+    {
+    "tableName": "fred_test_table22",
+    "instId": "bfaa0186c7914119bf23ed0f30b4d4b6",
+    "encryptKey": null,
+    "storageInfo": "oss://mappic-dev/endToEnd/fred_test_table22",
+    "isEncrypted": false,
+    "partitionPattern": null,
+    "isTemp": false,
+    "columnInfo": [{"columnName":"event_id","isEncrypted":false},{"columnName":"event_link_id","isEncrypted":false},{"columnName":"merchant_id","isEncrypted":false},{"columnName":"merchant_name","isEncrypted":false},{"columnName":"user_id","isEncrypted":false},{"columnName":"gmt_occur","isEncrypted":false},{"columnName":"acq_site_id","isEncrypted":false},{"columnName":"acq_site_name","isEncrypted":false},{"columnName":"acq_site_event_amount","isEncrypted":false},{"columnName":"acq_site_event_currency","isEncrypted":false},{"columnName":"pay_site_id","isEncrypted":false},{"columnName":"pay_site_name","isEncrypted":false},{"columnName":"pay_site_user_id","isEncrypted":false},{"columnName":"pay_site_event_amount","isEncrypted":false},{"columnName":"pay_site_event_currency","isEncrypted":false},{"columnName":"gn_payment_id","isEncrypted":false},{"columnName":"gn_event_amount","isEncrypted":false},{"columnName":"gn_site_user_id","isEncrypted":false},{"columnName":"payment_scenario","isEncrypted":false},{"columnName":"is_in_store_payment","isEncrypted":false},{"columnName":"campaign_id","isEncrypted":false},{"columnName":"campaign_type","isEncrypted":false},{"columnName":"campaign_name","isEncrypted":false},{"columnName":"campaign_status","isEncrypted":false},{"columnName":"begin_time","isEncrypted":false},{"columnName":"end_time","isEncrypted":false},{"columnName":"promo_amount","isEncrypted":false},{"columnName":"promo_currency","isEncrypted":false},{"columnName":"gn_promo_amount","isEncrypted":false},{"columnName":"promo_type","isEncrypted":false},{"columnName":"promo_source","isEncrypted":false},{"columnName":"promo_result","isEncrypted":false},{"columnName":"promo_stage","isEncrypted":false},{"columnName":"coupon_id","isEncrypted":false},{"columnName":"order_title","isEncrypted":false},{"columnName":"result_message","isEncrypted":false},{"columnName":"error_message","isEncrypted":false},{"columnName":"event_properties","isEncrypted":false},{"columnName":"refund_status","isEncrypted":false},{"columnName":"acq_payment_amt","isEncrypted":false},{"columnName":"pay_result","isEncrypted":false},{"columnName":"pay_result_message","isEncrypted":false},{"columnName":"refund_amt","isEncrypted":false},{"columnName":"order_succ","isEncrypted":false},{"columnName":"decision_rule_id","isEncrypted":false},{"columnName":"psp_decision","isEncrypted":false},{"columnName":"psp_riskinfo","isEncrypted":false},{"columnName":"play_id","isEncrypted":false},{"columnName":"apt_gn_site_user_id","isEncrypted":false},{"columnName":"dt","isEncrypted":false}]
+    }
     ]
-}'
+    }'
 ```
 
 创建输入表
 
 ```java
 curl --location --request POST 'http://对外服务ip:8889/mappic/datameta' \
---header 'Content-Type: application/json' \
---header 'Accept: */*' \
---header 'Connection: keep-alive' \
---data-raw '{
+    --header 'Content-Type: application/json' \
+    --header 'Accept: */*' \
+    --header 'Connection: keep-alive' \
+    --data-raw '{
     "tenantId": "mappic_confidential_cloud_computing",
     "tableMetas": [
-        {
-            "tableName": "adm_ctu_app_gn_multi_data_collect_di", // 表名
-            "instId": "bfaa0186c7914119bf23ed0f30b4d4b6", // 机构id
-            "encryptKey": null, 
-            "storageInfo": "xxxxx",
-            "isEncrypted": false,
-            "partitionPattern": null,
-            "isTemp": false,
-            "columnInfo": [
-                    {
-                        "columnName":"event_id",
-                        "isEncrypted":false
-                    }
-                    ]
-        }
+    {
+    "tableName": "adm_ctu_app_gn_multi_data_collect_di", // 表名
+    "instId": "bfaa0186c7914119bf23ed0f30b4d4b6", // 机构id
+    "encryptKey": null,
+    "storageInfo": "xxxxx",
+    "isEncrypted": false,
+    "partitionPattern": null,
+    "isTemp": false,
+    "columnInfo": [
+    {
+    "columnName":"event_id",
+    "isEncrypted":false
+    }
     ]
-}'
+    }
+    ]
+    }'
 ```
 **step:3 提交任务，获取任务实例**
 
 ```java
 curl --location 'http://对外服务ip:8889/mappic/task/template' \
---header 'Content-Type: application/json' \
---header 'Accept: */*' \
---header 'Connection: keep-alive' \
---data '{
+    --header 'Content-Type: application/json' \
+    --header 'Accept: */*' \
+    --header 'Connection: keep-alive' \
+    --data '{
     "tenantId":"mappic_confidential_cloud_computing",
     "sql":"select * from adm_ctu_app_gn_multi_data_collect_di limit 1000",
     "config":{},
@@ -217,13 +218,13 @@ curl --location 'http://对外服务ip:8889/mappic/task/template' \
     "outputTable":"bfaa0186c7914119bf23ed0f30b4d4b6.fred_test_table22",
     "priorityLevel":1,
     "baseConfig":{
-        "name":"xxx",
-        "instId":"bfaa0186c7914119bf23ed0f30b4d4b6",
-        "jobId":"xxxx",
-        "timestamp":"2023-11-14 11:28:30",
-        "env":"DEV"
+    "name":"xxx",
+    "instId":"bfaa0186c7914119bf23ed0f30b4d4b6",
+    "jobId":"xxxx",
+    "timestamp":"2023-11-14 11:28:30",
+    "env":"DEV"
     }
-}'
+    }'
 ```
 
 **step4: 查看执行情况**
@@ -235,7 +236,7 @@ curl --location 'http://对外服务ip:8889/mappic/task/template' \
 curl --location 'localhost:8889/mappic/task/log?taskInstanceId=任务实例&tenantId=mappic_confidential_cloud_computing&logWindowSecs=1'
 
 // 查询日志返回结果
-{ 
+{
   "errorCode":null,
   "errorMessage":null,
   "status":null,
@@ -264,26 +265,26 @@ curl --location 'localhost:8889/mappic/task/detail?taskInstanceId=任务实例id
 curl --location 'localhost:8889/mappic/task/status/list' \
 --header 'Content-Type: application/json' \
 --data '{
-    "tenantId": "mappic_confidential_cloud_computing",
-    "taskInstanceIds": ["任务的实例"]
+"tenantId": "mappic_confidential_cloud_computing",
+"taskInstanceIds": ["任务的实例"]
 }'
 
 // 查询任务状态返回结果
 {
-  "errorCode":null,
-  "errorMessage":null,
-  "status":null,
-  "data":{
-    "statusDetail":[
-      {
-        "taskInstanceId":"xxxxxx",
-        "status":"RUNNING",
-        "startTime":"1715602501000",
-        "currentTime":"1715603076530"
-      }
-    ]
-  },
-  "success":true
+"errorCode":null,
+"errorMessage":null,
+"status":null,
+"data":{
+"statusDetail":[
+{
+"taskInstanceId":"xxxxxx",
+"status":"RUNNING",
+"startTime":"1715602501000",
+"currentTime":"1715603076530"
+}
+]
+},
+"success":true
 }
 ```
 
@@ -328,7 +329,7 @@ step2：查看ack集群->点击工作负载->容器组->切换命名空间为def
 <img src="images/submit_task.png" width="800" height="200">
 
 #### 更多平台体验链接
-  进群联系管理员 **@霖珂和@冬雪**
+进群联系管理员 **@霖珂和@冬雪**
 # 联系我们
 - **联系邮箱**：antchainmappic@service.alipay.com
 
